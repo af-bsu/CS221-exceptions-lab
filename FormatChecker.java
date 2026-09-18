@@ -1,40 +1,48 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * 
+ */
 public class FormatChecker {
-    private String delimiter = "\\s+";
+    /**
+     * 
+     */
+    public static boolean checkFile(String filename) throws FileNotFoundException {
+        int rows, cols, foundRows, foundCols;
+        double[][] table;
 
-    // Utility methods go here
-    public boolean checkFileExists(String filename) throws FileNotFoundException {
+        File file = new File(filename);
+        Scanner linescan, fieldscan;
         try {
-            File testFile = new File(filename);
-        } catch (FileNotFoundException e) {
-            e.toString();
+            linescan = new Scanner(file);
+        } catch (FileNotFoundException exception) {
+            exception.toString();
             return false;
         }
+
+        
 
         return true;
     }
 
-    public boolean checkTable(File file) {
-        int rows, cols;
-        Scanner linescan = new Scanner(file);
-        linescan.close();
-    }
-
-    public static void main(String[] args) {
+    // Driver class ...
+    public static void main(String[] args) throws FileNotFoundException {
         // Don't waste my program's time.
-        if (args.length < 1) {
-            System.out.println("No arguments (valid file names) provided.");
-            System.out.println("Usage: $ java FormatChecker file1 [file2 file3 ... fileN]");
+        if (args.length < 1) {  
+            System.out.println("Usage: $ java FormatChecker file1 [file2 ... fileN]");
             System.exit(1);
         }
 
         int fileIndex = 0;
+        boolean isValidFile;
         while (fileIndex < args.length) {
-            try {
-                File file = new File(args[fileIndex]);
-            } catch (FileNotFoundException e) {
-                e.toString();
+            String filename = args[fileIndex];
+            isValidFile = checkFile(filename);
+            if (isValidFile) {
+                System.out.println("VALID\n");
+            } else {
                 System.out.println("INVALID\n");
             }
         }

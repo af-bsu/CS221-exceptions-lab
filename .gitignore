@@ -1,3 +1,4 @@
 # Helpful gitignore for compiled Java files and sample table files
 *.class
 *.dat
+*.zip
